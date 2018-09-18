@@ -8,11 +8,17 @@
 
 namespace Tests\Framework;
 
-use GuzzleHttp\Psr7\Request;
+use Framework\Router;
+use GuzzleHttp\Psr7\ServerRequest;
 use PHPUnit\Framework\TestCase;
 
 class RouterTest extends TestCase
 {
+    /**
+     * @var Router
+     */
+    private $router;
+
     public function setUp()
     {
         $this->router = new Router();
@@ -20,7 +26,7 @@ class RouterTest extends TestCase
 
     public function testGetMethod()
     {
-        $request = new Request('GET', '/blog');
+        $request = new ServerRequest('GET', '/blog');
 
         $this->router->get('/blog', function () {
             return 'hello';
@@ -33,7 +39,7 @@ class RouterTest extends TestCase
 
     public function testGetMethodIfURLDoesNotExist()
     {
-        $request = new Request('GET', '/blog');
+        $request = new ServerRequest('GET', '/blog');
 
         $this->router->get('/blogecece', function () {
             return 'hello';
@@ -41,14 +47,13 @@ class RouterTest extends TestCase
 
         $route = $this->router->match($request);
         $this->assertEquals(null, $route);
-        $this->assertEquals('hello', call_user_func_array($route->getCallback(), [$request]));
     }
 
     public function testGetMethodWithParameters()
     {
-        $request = new Request('GET', '/blog/un-slug-1');
+        $request = new ServerRequest('GET', '/blog/un-slug-1');
 
-        $this->router->get('/blog/{slug:[a-z0-9\-]+}-{id:\d+}', function () {
+        $this->router->get('/blog', function () {
             return 'ececece';
         }, 'posts');
 
@@ -59,6 +64,6 @@ class RouterTest extends TestCase
         $route = $this->router->match($request);
         $this->assertEquals('post.show', $route->getName());
         $this->assertEquals('hello', call_user_func_array($route->getCallback(), [$request]));
-        $this->assertEquals(['slug' => 'un-slug', 'id' => '1'], $route->getParameters());
+        $this->assertEquals(['slug' => 'un-slug', 'id' => '1'], $route->getParams());
     }
 }
