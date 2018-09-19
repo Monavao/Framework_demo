@@ -20,6 +20,9 @@ class Router
      */
     private $router;
 
+    /**
+     * Router constructor.
+     */
     public function __construct()
     {
         $this->router = new FastRouteRouter();
@@ -50,5 +53,15 @@ class Router
         }
 
         return $route;
+    }
+
+    /**
+     * @param string $name
+     * @param array  $params
+     * @return null|string
+     */
+    public function generateUri(string  $name, array $params): ?string
+    {
+        return $this->router->generateUri($name, $params);
     }
 }

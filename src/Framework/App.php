@@ -15,9 +15,18 @@ use Psr\Http\Message\ServerRequestInterface;
 class App
 {
     /**
+     * Liste des modules
+     *
      * @var array
      */
     private $modules = [];
+
+    /**
+     * Router
+     *
+     * @var Router
+     */
+    private $router;
 
 
     /**
@@ -27,8 +36,10 @@ class App
      */
     public function __construct(array $modules = [])
     {
+        $this->router = new Router();
+
         foreach ($modules as $module) {
-            $this->modules[] = new $module();
+            $this->modules[] = new $module($this->router);
         }
     }
 
