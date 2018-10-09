@@ -9,7 +9,8 @@
   "autoload": {
     "psr-4": {
       "Framework\\": "src/Framework",
-      "App\\": "src"
+      "App\\": "src",
+      "Tests\\": "tests"
     }
   },
   "require": {
