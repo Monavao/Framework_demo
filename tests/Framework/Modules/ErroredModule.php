@@ -10,6 +10,12 @@ namespace Tests\Framework\Modules;
 
 class ErroredModule
 {
+    /**
+     * ErroredModule constructor.
+     * Just for testing
+     *
+     * @param \Framework\Router $router
+     */
     public function __construct(\Framework\Router $router)
     {
         $router->get('/demo', function () {

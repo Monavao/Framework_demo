@@ -14,6 +14,11 @@ use Psr\Http\Message\ServerRequestInterface;
 
 class BlogModule
 {
+    /**
+     * BlogModule constructor.
+     *
+     * @param Router $router
+     */
     public function __construct(Router $router)
     {
         $router->get('/blog', [$this, 'index'], 'blog.index');
