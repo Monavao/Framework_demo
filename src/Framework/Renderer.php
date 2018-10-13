@@ -48,4 +48,5 @@ class Renderer
 
         return str_replace('@', $namespace, $this->paths[$namespace], $view);
     }
+
 }
