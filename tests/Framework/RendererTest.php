@@ -27,7 +27,7 @@ class RendererTest extends TestCase
         $this->assertEquals('Salut!!!!', $content);
     }
 
-    public function testRenderTheDefaultRightPath()
+    public function testRenderTheDefaultPath()
     {
         $this->renderer->addPath(__DIR__ . '/views');
         $content = $this->renderer->render('demo');

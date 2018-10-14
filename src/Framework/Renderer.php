@@ -25,7 +25,11 @@ class Renderer
 
     public function render(string $view): string
     {
-        $path = $this->paths[self::DEFAULT_NAMESPACE] . DIRECTORY_SEPARATOR . $view . '.php';
+        if ($this->hasNamespace($view)) {
+            $path = $this->replaceNamespace($view) . '.php';
+        } else {
+            $path = $this->paths[self::DEFAULT_NAMESPACE] . DIRECTORY_SEPARATOR . $view . '.php';
+        }
 
         ob_start();
         require($path);
@@ -39,13 +43,13 @@ class Renderer
 
     private function getNamespace(string $view): string
     {
-        return substr($view, 1, strpos($view, '/'));
+        return substr($view, 1, strpos($view, '/') - 1);
     }
 
     private function replaceNamespace(string $view): string
     {
         $namespace = $this->getNamespace($view);
 
-        return str_replace('@', $namespace, $this->paths[$namespace], $view);
+        return str_replace('@' . $namespace, $this->paths[$namespace], $view);
     }
 }
