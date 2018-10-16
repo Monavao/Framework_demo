@@ -6,9 +6,9 @@
  * Time: 23:53
  */
 
-namespace Framework;
+namespace Framework\Renderer;
 
-class Renderer
+class PHPRenderer implements RendererInterface
 {
     /**
      *
@@ -26,6 +26,18 @@ class Renderer
      * @var array
      */
     private $globals = [];
+
+    /**
+     * Renderer constructor.
+     *
+     * @param null|string $defaultPath
+     */
+    public function __construct(?string $defaultPath = null)
+    {
+        if (!is_null($defaultPath)) {
+            $this->addPath($defaultPath);
+        }
+    }
 
     /**
      * Permet d'ajouter un chemin pour charger les vues
