@@ -18,6 +18,7 @@ class RendererTest extends TestCase
     public function setUp()
     {
         $this->renderer = new Renderer();
+        $this->renderer->addPath(__DIR__ . '/views');
     }
 
     public function testRenderTheRightPath()
@@ -29,8 +30,20 @@ class RendererTest extends TestCase
 
     public function testRenderTheDefaultPath()
     {
-        $this->renderer->addPath(__DIR__ . '/views');
         $content = $this->renderer->render('demo');
         $this->assertEquals('Salut!!!!', $content);
+    }
+
+    public function testRenderWithParams()
+    {
+        $content = $this->renderer->render('demoparams', ['nom' => 'Tony']);
+        $this->assertEquals('Salut Tony!!!!', $content);
+    }
+
+    public function testGlobalParameters()
+    {
+        $this->renderer->addGlobal('nom', 'Tony');
+        $content = $this->renderer->render('demoparams');
+        $this->assertEquals('Salut Tony!!!!', $content);
     }
 }

@@ -1,7 +1,4 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: monavao
- * Date: 13/10/18
- * Time: 23:37
- */
+<?= $renderer->render('header', ['title' => $slug]); ?>
+    <br><br>
+    <h1>Bienvenue sur l'article <?= $slug; ?></h1>
+<?= $renderer->render('footer'); ?>
