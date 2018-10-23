@@ -18,6 +18,10 @@ class BlogModule extends Module
 {
     const DEFINITIONS = __DIR__ . '/config.php';
 
+    /**
+     * @var RendererInterface
+     */
+    private $renderer;
 
     /**
      * BlogModule constructor.

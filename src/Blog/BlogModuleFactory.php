@@ -6,15 +6,16 @@
  * Time: 23:53
  */
 
-namespace Framework\Router;
+namespace Framework\Blog;
 
+use App\Blog\BlogModule;
 use Framework\Router;
 use Psr\Container\ContainerInterface;
 
 class BlogModuleFactory
 {
-    public function __invoke(ContainerInterface $container): Router
+    public function __invoke(ContainerInterface $container): BlogModule
     {
-        return new Router();
+        return new BlogModule();
     }
 }
