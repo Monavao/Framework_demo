@@ -10,22 +10,23 @@ require '../vendor/autoload.php';
 
 use App\Blog\BlogModule;
 
+$modules = [
+    BlogModule::class,
+];
+
 $builder = new \DI\ContainerBuilder();
 $builder->addDefinitions(dirname(__DIR__) . '/config/config.php');
 $builder->addDefinitions(dirname(__DIR__) . '/config.php');
 
+foreach ($modules as $module) {
+    if ($module::DEFINITIONS) {
+        $builder->addDefinitions($module::DEFINITIONS);
+    }
+}
+
 $container = $builder->build();
-$renderer = $container->get(\Framework\Renderer\RendererInterface::class);
 
-var_dump($renderer);
-die;
-
-$loader = new Twig_Loader_Filesystem(dirname(__DIR__) . '/views');
-$twig   = new Twig_Environment($loader, []);
-
-$app = new \Framework\App([BlogModule::class], [
-    'renderer' => $renderer,
-]);
+$app = new \Framework\App($container, $modules);
 
 $response = $app->run(\GuzzleHttp\Psr7\ServerRequest::fromGlobals());
 

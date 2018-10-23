@@ -20,7 +20,6 @@ class TwigRenderer implements RendererInterface
         $this->twig   = new \Twig_Environment($this->loader, []);
     }
 
-
     /**
      * @param string      $namespace
      * @param null|string $path
@@ -30,7 +29,6 @@ class TwigRenderer implements RendererInterface
     {
         $this->loader->addPath($path, $namespace);
     }
-
 
     /**
      * @param string $view

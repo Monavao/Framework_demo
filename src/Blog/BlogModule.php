@@ -8,31 +8,30 @@
 
 namespace App\Blog;
 
+use Framework\Module;
 use Framework\Router;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Framework\Renderer\RendererInterface;
 
-class BlogModule
+class BlogModule extends Module
 {
-    /**
-     * @var Renderer
-     */
-    private $renderer;
+    const DEFINITIONS = __DIR__ . '/config.php';
 
 
     /**
      * BlogModule constructor.
      *
-     * @param Router   $router
-     * @param Renderer $renderer
+     * @param string            $prefix
+     * @param Router            $router
+     * @param RendererInterface $renderer
      */
-    public function __construct(Router $router, RendererInterface $renderer)
+    public function __construct(string $prefix, Router $router, RendererInterface $renderer)
     {
         $this->renderer = $renderer;
         $this->renderer->addPath('blog', __DIR__ . '/views');
-        $router->get('/blog', [$this, 'index'], 'blog.index');
-        $router->get('/blog/{slug:[-a-z0-9]+}', [$this, 'show'], 'blog.show');
+        $router->get($prefix, [$this, 'index'], 'blog.index');
+        $router->get($prefix . '/blog/{slug:[-a-z0-9]+}', [$this, 'show'], 'blog.show');
     }
 
     /**
