@@ -7,5 +7,5 @@
  */
 
 return [
-    'config.view_path' => __DIR__ . '/tests2',
+    'blog.prefix'      => '/news',
 ];

@@ -11,7 +11,7 @@ use Framework\Renderer\TwigRendererFactory;
 use Framework\Router;
 
 return [
-    'views.path' => dirname(__DIR__) . '/views',
-    Router::class => \DI\autowire(),
+    'views.path'             => dirname(__DIR__) . '/views',
+    Router::class            => \DI\autowire(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class)
 ];
