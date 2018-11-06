@@ -12,6 +12,9 @@ use Framework\Router;
 
 return [
     'views.path'             => dirname(__DIR__) . '/views',
+    'twig.extensions' => [
+        \DI\get(\Framework\Router\RouterTwigExtension::class)
+    ],
     Router::class            => \DI\autowire(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class)
 ];
