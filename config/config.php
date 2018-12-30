@@ -13,7 +13,7 @@ use Psr\Container\ContainerInterface;
 
 return [
     'database.host'          => 'localhost',
-    'database.username'      => 'moom',
+    'database.username'      => 'monavao',
     'database.password'      => 'root',
     'database.name'          => 'framework_demo',
     'database.charset'       => 'utf8',
