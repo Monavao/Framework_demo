@@ -8,9 +8,9 @@
 
 namespace App\Blog\Actions;
 
+use App\Blog\Table\PostTable;
 use Framework\Actions\RouterAwareAction;
 use Framework\Renderer\RendererInterface;
-use \GuzzleHttp\Psr7\Response;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Framework\Router;
@@ -23,9 +23,9 @@ class BlogAction
     private $renderer;
 
     /**
-     * @var \PDO
+     * @var PostTable
      */
-    private $pdo;
+    private $postTable;
 
     /**
      * @var Router
@@ -38,14 +38,14 @@ class BlogAction
      * BlogAction constructor.
      *
      * @param RendererInterface $renderer
-     * @param \PDO              $pdo
+     * @param PostTable         $postTable
      * @param Router            $router
      */
-    public function __construct(RendererInterface $renderer, \PDO $pdo, Router $router)
+    public function __construct(RendererInterface $renderer, Router $router, PostTable $postTable)
     {
-        $this->renderer = $renderer;
-        $this->pdo      = $pdo;
-        $this->router   = $router;
+        $this->renderer  = $renderer;
+        $this->postTable = $postTable;
+        $this->router    = $router;
     }
 
     /**
@@ -69,9 +69,7 @@ class BlogAction
      */
     public function index(): string
     {
-        $posts = $this->pdo
-            ->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT 10')
-            ->fetchAll();
+        $posts = $this->postTable->findPaginated();
 
         return $this->renderer->render('@blog/index', compact('posts'));
     }
@@ -84,10 +82,7 @@ class BlogAction
     public function show(ServerRequestInterface $request)
     {
         $slug = $request->getAttribute('slug');
-
-        $query = $this->pdo->prepare('SELECT * FROM posts WHERE id = ?');
-        $query->execute([$request->getAttribute('id')]);
-        $post = $query->fetch();
+        $post = $this->postTable->find($request->getAttribute('id'));
 
         if ($post->slug !== $slug) {
             return $this->redirect('blog.show', [

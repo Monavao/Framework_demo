@@ -27,8 +27,7 @@ trait RouterAwareAction
     public function redirect(string $path, array $params = []): ResponseInterface
     {
         $redirectUri = $this->router->generateUri($path, $params);
-
-        $response = new Response();
+        $response    = new Response();
 
         return $response->withStatus(301)->WithHeader('location', $redirectUri);
     }
