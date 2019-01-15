@@ -8,6 +8,9 @@
 
 namespace App\Blog\Table;
 
+use Framework\Database\PaginatedQuery;
+use Pagerfanta\Pagerfanta;
+
 class PostTable
 {
     /**
@@ -26,11 +29,23 @@ class PostTable
 
     /**
      * Pagine les articles
-     * @return \stdClass[]
+     *
+     * @param int $perPage Nombre de résultats par page
+     * @param int $currentPage Page courante
+     * @return Pagerfanta
      */
-    public function findPaginated(): array
+    public function findPaginated(int $perPage, int $currentPage): Pagerfanta
     {
-        return $this->pdo->query('SELECT * FROM posts ORDER BY created_at DESC LIMIT 10')->fetchAll();
+        $query = new PaginatedQuery(
+            $this->pdo,
+            'SELECT * FROM posts',
+            'SELECT COUNT(id) FROM posts'
+        );
+
+
+        return (new Pagerfanta($query))
+            ->setMaxPerPage($perPage)
+            ->setCurrentPage($currentPage);
     }
 
     /**
