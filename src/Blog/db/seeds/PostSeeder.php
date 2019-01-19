@@ -1,6 +1,5 @@
 <?php
 
-
 use Phinx\Seed\AbstractSeed;
 
 class PostSeeder extends AbstractSeed
@@ -13,7 +12,8 @@ class PostSeeder extends AbstractSeed
      * More information on writing seeders is available here:
      * http://docs.phinx.org/en/latest/seeding.html
      */
-    public function run() {
+    public function run()
+    {
         $data  = [];
         $faker = \Faker\Factory::create('fr_FR');
 

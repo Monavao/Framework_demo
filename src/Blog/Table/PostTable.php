@@ -42,7 +42,6 @@ class PostTable
             'SELECT COUNT(id) FROM posts'
         );
 
-
         return (new Pagerfanta($query))
             ->setMaxPerPage($perPage)
             ->setCurrentPage($currentPage);

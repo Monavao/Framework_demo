@@ -19,7 +19,8 @@ return [
     'database.charset'       => 'utf8',
     'views.path'             => dirname(__DIR__) . '/views',
     'twig.extensions'        => [
-        \DI\get(\Framework\Router\RouterTwigExtension::class)
+        \DI\get(\Framework\Router\RouterTwigExtension::class),
+        \DI\get(\Framework\Twig\PagerFantaExtension::class),
     ],
     Router::class            => \DI\autowire(),
     RendererInterface::class => \DI\factory(TwigRendererFactory::class),
