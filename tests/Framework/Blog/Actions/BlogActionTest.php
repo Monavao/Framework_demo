@@ -9,6 +9,7 @@
 namespace Tests\App\Blog_Actions;
 
 use App\Blog\Actions\BlogAction;
+use App\Blog\Entity\Post;
 use App\Blog\Table\PostTable;
 use Framework\Renderer\RendererInterface;
 use Framework\Router;
@@ -53,10 +54,10 @@ class BlogActionTest extends TestCase
         );
     }
 
-    public function makePost(int $id, string $slug): \stdClass
+    public function makePost(int $id, string $slug): Post
     {
         //Article
-        $post       = new \stdClass();
+        $post       = new Post();
         $post->id   = $id;
         $post->slug = $slug;
 

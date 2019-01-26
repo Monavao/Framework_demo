@@ -12,10 +12,11 @@
                 {% for post in row %}
                     <div class="card">
                         <div class="card-header">
-                            <a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}">{{ post.name }}</a>
+                            <h2><a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}">{{ post.name }}</a></h2>
                         </div>
                         <div class="card-body">
-                            <p class="card-text">{{ post.content | nl2br | excerpt}}</p>
+                            <p class="card-text">{{ post.content | excerpt | nl2br }}</p>
+                            <p class="text-muted">{{ post.created_at | ago }}</p>
                         </div>
                         <div class="card-footer">
                             <a href="{{ path('blog.show', {slug: post.slug, id: post.id}) }}" class="btn btn-primary">Voir l'article</a>
@@ -23,6 +24,7 @@
                     </div>
                 {% endfor %}
             </div>
+            <br>
         {% endfor %}
     </div>
 
