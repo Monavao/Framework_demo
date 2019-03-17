@@ -1,0 +1,24 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title "Editer l'article" %}
+
+{% block body %}
+    <br><br><br><br>
+    <h1>Editer l'article {{ item.name }}</h1>
+
+    <form action="{{ path('admin.blog.edit', {id: item.id}) }}" method="post">
+        <div class="form-group">
+            <label for="name">Titre de l'article</label>
+            <input type="text" class="form-control" id="name" name="name" value="{{ item.name }}">
+        </div>
+        <div class="form-group">
+            <label for="slug">Titre de l'article</label>
+            <input type="text" class="form-control" id="slug" name="slug" value="{{ item.slug }}">
+        </div>
+        <div class="form-group">
+            <label for="content">Contenu</label>
+            <textarea class="form-control" name="content" id="content" rows="10">{{ item.content }}</textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Editer</button>
+    </form>
+{% endblock %}

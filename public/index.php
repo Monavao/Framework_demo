@@ -9,8 +9,10 @@
 require dirname(__DIR__) . '/vendor/autoload.php';
 
 use App\Blog\BlogModule;
+use App\Admin\AdminModule;
 
 $modules = [
+    AdminModule::class,
     BlogModule::class,
 ];
 

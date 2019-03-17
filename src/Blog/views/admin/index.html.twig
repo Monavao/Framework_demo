@@ -1,0 +1,26 @@
+{% extends '@admin/layout.html.twig' %}
+
+{% block title "Editer les articles" %}
+
+{% block body %}
+    <table class="table table-striped">
+        <thead>
+        <tr>
+            <td>Titre</td>
+            <td>Actions</td>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr>
+                <td>{{ item.name }}</td>
+                <td>
+                    <a href="{{ path('admin.blog.edit', {id: item.id}) }}" class="btn btn-primary">Editer</a>
+                </td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    {{ paginate(items, 'admin.blog.index') }}
+{% endblock %}

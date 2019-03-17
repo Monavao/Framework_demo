@@ -20,7 +20,8 @@
     "twig/twig": "^2.5",
     "php-di/php-di": "^6.0",
     "pagerfanta/pagerfanta": "^2.0",
-    "ext-pdo": "*"
+    "ext-pdo": "*",
+    "ext-http": "*"
   },
   "require-dev": {
     "squizlabs/php_codesniffer": "^3.3",

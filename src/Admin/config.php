@@ -2,10 +2,10 @@
 /**
  * Created by PhpStorm.
  * User: monavao
- * Date: 23/10/18
- * Time: 23:48
+ * Date: 17/03/19
+ * Time: 16:22
  */
 
 return [
-    'blog.prefix'     => '/blog',
+    'admin.prefix' => '/admin',
 ];
